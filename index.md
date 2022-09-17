@@ -26,6 +26,13 @@
 
 - [Penetration Testing](hacking/pentest/index.md)
 - [Hacking Tools](hacking/hacking-tools/index.md)
+- [Boxes](hacking/boxes/index.md)
+
+## Linux
+[Linux](linux/index.md)
+
+- [Commands](linux/commands/index.md)
+- [Scripts](linux/scripts/index.md)
 
 ## Machine Learning
 [Machine Learning](ml/index.md)
