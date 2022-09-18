@@ -7,15 +7,17 @@ set nocompatible
 filetype plugin on
 syntax on
 ```
-## Installation for vimwiki
+## Installation
 
-### Vim-Plugin:
+### VimWiki
+
+#### Vim-Plugin:
 
 ```
 Plug 'vimwiki/vimwiki'
 ```
 
-### Pathogen:
+#### Pathogen:
 
 ```
 cd ~/.vim
@@ -24,13 +26,13 @@ cd bundle
 git clone https://github.com/vimwiki/vimwiki.git
 ```
 
-### Vundle:
+#### Vundle:
 
 ```
 Plugin 'vimwiki/vimwiki'
 ```
 
-## Markdown
+### Markdown
 
 ```
 Plugin 'iamcco/markdown-preview.nvim'
@@ -38,6 +40,26 @@ Plugin 'preservim/vim-markdown'
 Plugin 'vim-pandoc/vim-pandoc'
 Plugin 'vim-pandoc/vim-pandoc-syntax'
 ```
+
+## Additional Configurations
+
+### Kali
+
+1. Must run :call mkdp#util#install() in vim for markdown to work.
+2. Vim must be removed using sudo apt-get remove vim and then compiled from source using
+
+```
+sudo apt-get install -y python3-distutils python3-dev
+git clone https://github.com/vim/vim.git
+cd vim
+./configure --prefix=/usr/local \	     
+--enable-python3interp \
+--with-python3-config-dir=/usr/lib/python3.6/config-*
+make
+sudo make install
+```
+
+for python support.
 
 ## Usage
 
