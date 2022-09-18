@@ -3,10 +3,11 @@
 ## Prerequisites
 In vim set the following:
 
-  set nocompatible
-  filetype plugin on
-  syntax on
-
+``` 
+set nocompatible
+filetype plugin on
+syntax on
+```
 My comprehensive notes. Topics:
 
 1.) Finance - Algorithmic day trading, technical analysis, and fundamental analysis notes from various books.
