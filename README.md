@@ -2,16 +2,12 @@
 
 ## Prerequisites
 
-Add to .vimrc:
-
 ``` 
 set nocompatible
 filetype plugin on
 syntax on
 ```
 ## Installation for vimwiki
-
-Add to .vimrc
 
 ### Vim-Plugin
 
@@ -27,6 +23,27 @@ mkdir bundle
 cd bundle
 git clone https://github.com/vimwiki/vimwiki.git
 ```
+
+### Vundle
+
+```
+Plugin 'vimwiki/vimwiki'
+```
+
+## Markdown
+
+```
+Plugin 'iamcco/markdown-preview.nvim'
+Plugin 'preservim/vim-markdown'
+Plugin 'vim-pandoc/vim-pandoc'
+Plugin 'vim-pandoc/vim-pandoc-syntax'
+```
+
+## usage
+
+* To reach the main wiki, open vim and hit `\ww`.
+* Navigate through the wiki by using enter and backspace
+* Run the command `:MarkdownPreview` to open the markdown file in your search engine.
 
 ## Topics:
 
