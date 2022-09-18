@@ -9,13 +9,13 @@ syntax on
 ```
 ## Installation for vimwiki
 
-### Vim-Plugin
+### Vim-Plugin:
 
 ```
 Plug 'vimwiki/vimwiki'
 ```
 
-### Pathogen
+### Pathogen:
 
 ```
 cd ~/.vim
@@ -24,7 +24,7 @@ cd bundle
 git clone https://github.com/vimwiki/vimwiki.git
 ```
 
-### Vundle
+### Vundle:
 
 ```
 Plugin 'vimwiki/vimwiki'
