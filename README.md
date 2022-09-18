@@ -42,7 +42,7 @@ Plugin 'vim-pandoc/vim-pandoc-syntax'
 ## usage
 
 * To reach the main wiki, open vim and hit `\ww`.
-* Navigate through the wiki by using enter and backspace
+* Navigate through the wiki by using enter and backspace.
 * Run the command `:MarkdownPreview` to open the markdown file in your search engine.
 
 ## Topics:
