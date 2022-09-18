@@ -39,7 +39,7 @@ Plugin 'vim-pandoc/vim-pandoc'
 Plugin 'vim-pandoc/vim-pandoc-syntax'
 ```
 
-## usage
+## Usage
 
 * To reach the main wiki, open vim and hit `\ww`.
 * Navigate through the wiki by using enter and backspace.
