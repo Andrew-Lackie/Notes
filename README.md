@@ -1,14 +1,17 @@
 # Notes using vimwiki
 
 ## Prerequisites
-In vim set the following:
+
+Add to .vimrc:
 
 ``` 
 set nocompatible
 filetype plugin on
 syntax on
 ```
-## Installation
+## Installation for vimwiki
+
+Add to .vimrc
 
 ### Vim-Plugin
 
