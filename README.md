@@ -45,7 +45,7 @@ Plugin 'vim-pandoc/vim-pandoc-syntax'
 * Navigate through the wiki by using enter and backspace.
 * Run the command `:MarkdownPreview` to open the markdown file in your search engine.
 
-## Topics:
+## Topics
 
 1.) Finance - Algorithmic day trading, technical analysis, and fundamental analysis notes from various books.
 
