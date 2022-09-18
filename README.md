@@ -17,36 +17,20 @@ syntax on
 Plug 'vimwiki/vimwiki'
 ```
 
-#### Pathogen:
-
-```
-cd ~/.vim
-mkdir bundle
-cd bundle
-git clone https://github.com/vimwiki/vimwiki.git
-```
-
-#### Vundle:
-
-```
-Plugin 'vimwiki/vimwiki'
-```
-
 ### Markdown
 
 ```
-Plugin 'iamcco/markdown-preview.nvim'
-Plugin 'preservim/vim-markdown'
-Plugin 'vim-pandoc/vim-pandoc'
-Plugin 'vim-pandoc/vim-pandoc-syntax'
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+Plug 'preservim/vim-markdown'
+Plug 'vim-pandoc/vim-pandoc'
+Plug 'vim-pandoc/vim-pandoc-syntax'
 ```
 
 ## Additional Configurations
 
 ### Kali
 
-1. Must run :call mkdp#util#install() in vim for markdown to work.
-2. Vim must be removed using sudo apt-get remove vim and then compiled from source using
+1. Vim must be removed using sudo apt-get remove vim and then compiled from source using
 
 ```
 sudo apt-get install -y python3-distutils python3-dev
