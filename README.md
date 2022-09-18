@@ -8,7 +8,24 @@ set nocompatible
 filetype plugin on
 syntax on
 ```
-My comprehensive notes. Topics:
+## Installation
+
+### Vim-Plugin
+
+```
+Plug 'vimwiki/vimwiki'
+```
+
+### Pathogen
+
+```
+cd ~/.vim
+mkdir bundle
+cd bundle
+git clone https://github.com/vimwiki/vimwiki.git
+```
+
+## Topics:
 
 1.) Finance - Algorithmic day trading, technical analysis, and fundamental analysis notes from various books.
 
