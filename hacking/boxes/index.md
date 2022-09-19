@@ -8,7 +8,7 @@
 
 #### Easy
 
-- [Vulnversity](vulnversity.md)
+- [Vulnversity](vulnversity/vulnversity.md)
 
 #### Medium
 
