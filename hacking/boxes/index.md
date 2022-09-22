@@ -19,6 +19,8 @@
 ### TryHackMe
 
 #### Easy
+ 
+- [Blue](blue/blue.md)
 
 #### Medium
 
