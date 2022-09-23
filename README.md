@@ -32,7 +32,7 @@ Plug 'vim-pandoc/vim-pandoc-syntax'
 
 1. Vim must be removed using sudo apt-get remove vim and then compiled from source using
 
-```
+```sh
 sudo apt-get install -y python3-distutils python3-dev
 git clone https://github.com/vim/vim.git
 cd vim
