@@ -2,6 +2,10 @@
 
 IP Address: 10.10.107.23
 
+## Description
+
+Deploy & hack into a Windows machine, leveraging common misconfigurations issues.
+
 ## Flags
 
 1. flag{access_the_machine}

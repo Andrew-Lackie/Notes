@@ -9,6 +9,7 @@
 #### Easy
 
 - [Vulnversity](vulnversity/vulnversity.md)
+- [Kenobi](kenobi/kenobi.md)
 
 #### Medium
 
