@@ -25,5 +25,7 @@
 
 #### Medium
 
+- [Steel Mountain](steel-mountain/steelMountain.md)
+
 #### Hard
 
