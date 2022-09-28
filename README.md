@@ -53,10 +53,7 @@ for python support.
 
 ## Topics
 
-1.) Finance - Algorithmic day trading, technical analysis, and fundamental analysis notes from various books.
-
-2.) Programming - C/C++, Python, and working on notes for other languages.
-
-3.) Penetration Testing - Comprehensive notes on TryHackMe's Junior Pentesting learning path, and box write ups.
-
-4.) In the process of developing further notes in a number of fields: Quantum Mechanics, Differential Geometry, String Theory, Computer Science, Pentesting Tools, etc.
+1.) Penetration Testing - Comprehensive notes on TryHackMe's Junior Pentesting learning path, and CTF box write ups. I try to post a writeup at least every other day.
+2.) Programming - C/C++, Python, HTML, and others coming.
+3.) Finance - Algorithmic day trading, technical analysis, and fundamental analysis notes from various books.
+4.) In the process of developing further notes in a number of fields: Physics, Mathematics, Philosophy, Computer Science, Quantum Computing, and more.
