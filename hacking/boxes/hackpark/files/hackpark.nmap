@@ -1,0 +1,57 @@
+# Nmap 7.92 scan initiated Fri Sep 30 20:51:51 2022 as: nmap -Pn -vv -sC -oN hackpark.nmap 10.10.153.156
+Nmap scan report for 10.10.153.156
+Host is up, received user-set (0.19s latency).
+Scanned at 2022-09-30 20:51:52 PDT for 22s
+Not shown: 998 filtered tcp ports (no-response)
+PORT     STATE SERVICE       REASON
+80/tcp   open  http          syn-ack ttl 127
+| http-methods: 
+|   Supported Methods: GET HEAD OPTIONS TRACE POST
+|_  Potentially risky methods: TRACE
+| http-robots.txt: 6 disallowed entries 
+| /Account/*.* /search /search.aspx /error404.aspx 
+|_/archive /archive.aspx
+|_http-title: hackpark | hackpark amusements
+3389/tcp open  ms-wbt-server syn-ack ttl 127
+| ssl-cert: Subject: commonName=hackpark
+| Issuer: commonName=hackpark
+| Public Key type: rsa
+| Public Key bits: 2048
+| Signature Algorithm: sha1WithRSAEncryption
+| Not valid before: 2022-09-30T03:44:03
+| Not valid after:  2023-04-01T03:44:03
+| MD5:   171d 1cb7 2eb4 d0d1 fcf3 ac72 6f5b f174
+| SHA-1: c5d0 fa60 2979 b050 dffd 5876 8512 1ba7 f1c9 6ea8
+| -----BEGIN CERTIFICATE-----
+| MIIC1DCCAbygAwIBAgIQLsOBRmxH471IaYDwKItbazANBgkqhkiG9w0BAQUFADAT
+| MREwDwYDVQQDEwhoYWNrcGFyazAeFw0yMjA5MzAwMzQ0MDNaFw0yMzA0MDEwMzQ0
+| MDNaMBMxETAPBgNVBAMTCGhhY2twYXJrMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8A
+| MIIBCgKCAQEA3fb4kyfqaYyzml/CAvY4lhYLmmtVWziJsEK5zshm2fPg+wwkYO7d
+| G5kdDRKT5MptiMBneRiY1j9MNLnfrllffM4rTp9p+rKpEtj39W/0f9XaVM39aQFj
+| KItXo2HdLMtFfJu4J+h/jlJVdp3hEY/GNfNXlEPCyeOWPKUBR7w40/CpmN6522IX
+| grF7HTcygB2PSnjWwjaWEPzNLvDN+3Cy6+st9H7yZqm44+zU079bt/yqEo/DP/QA
+| v0mxbGyBIEHu4ET72ezWBI2uKXekLxT2udoyO37nAJgWaf0hVOu8iCeeVJbkFj3l
+| 5vqyny6D/IKMOj/uy8G02TDKO+IM59rMWQIDAQABoyQwIjATBgNVHSUEDDAKBggr
+| BgEFBQcDATALBgNVHQ8EBAMCBDAwDQYJKoZIhvcNAQEFBQADggEBAHp54gFE/mwz
+| QlB+ez4ruTDoLxl4Dgt28G0Q5zbuqR8Z+bXirmLWgYO4RZ6jaNVkgONJo42RGspu
+| sHYKSqWScaKvkPRrsnV5I56Y443JlwHehW1t8Q2Iis7rJ1pqpPfEjGpdShS5q+0f
+| NIlW3XxccsLSoPADkRkYciXoA8RQatmzES7HWk8jbFOdFwc2w0ud4JtloUa51hAW
+| U2dDVrYstgKYPZtyIAlsnbtoEoCf3fcl5AbP/8QLxzSSzkwHQwQeHUtZeEP5LCDS
+| 5aQWgCjthLjxtKQTS+4bZ7MezYjU8AUmEelc92t/rsoE6SJ1ipcBV0QasX7NluZe
+| F5HuhFE8VUw=
+|_-----END CERTIFICATE-----
+| rdp-ntlm-info: 
+|   Target_Name: HACKPARK
+|   NetBIOS_Domain_Name: HACKPARK
+|   NetBIOS_Computer_Name: HACKPARK
+|   DNS_Domain_Name: hackpark
+|   DNS_Computer_Name: hackpark
+|   Product_Version: 6.3.9600
+|_  System_Time: 2022-10-01T03:52:10+00:00
+|_ssl-date: 2022-10-01T03:52:10+00:00; 0s from scanner time.
+
+Host script results:
+|_clock-skew: mean: 0s, deviation: 0s, median: -1s
+
+Read data files from: /usr/bin/../share/nmap
+# Nmap done at Fri Sep 30 20:52:14 2022 -- 1 IP address (1 host up) scanned in 22.65 seconds
