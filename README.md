@@ -1,5 +1,15 @@
 # Notes using vimwiki
 
+## Topics
+
+1.) **Penetration Testing** - Comprehensive notes on TryHackMe's Junior Pentesting learning path, and CTF box write ups. I try to post a writeup at least every other day.
+
+2.) **Programming** - C/C++, Python, HTML, and others coming.
+
+3.) **Finance** - Algorithmic day trading, technical analysis, and fundamental analysis notes from various books.
+
+4.) In the process of developing further notes in a number of fields: Physics, Mathematics, Philosophy, Computer Science, Quantum Computing, and more.
+
 ## Prerequisites
 
 ``` 
@@ -50,13 +60,3 @@ for python support.
 * To reach the main wiki, open vim and hit `\ww`.
 * Navigate through the wiki by using enter and backspace.
 * Run the command `:MarkdownPreview` to open the markdown file in your search engine.
-
-## Topics
-
-1.) Penetration Testing - Comprehensive notes on TryHackMe's Junior Pentesting learning path, and CTF box write ups. I try to post a writeup at least every other day.
-
-2.) Programming - C/C++, Python, HTML, and others coming.
-
-3.) Finance - Algorithmic day trading, technical analysis, and fundamental analysis notes from various books.
-
-4.) In the process of developing further notes in a number of fields: Physics, Mathematics, Philosophy, Computer Science, Quantum Computing, and more.
