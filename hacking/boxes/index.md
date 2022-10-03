@@ -13,6 +13,8 @@
 
 #### Medium
 
+- [Game Zone](gamezone/gamezone.md)
+
 #### Hard
 
 ## Windows

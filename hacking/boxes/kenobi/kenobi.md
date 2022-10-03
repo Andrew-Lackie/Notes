@@ -18,7 +18,7 @@ Walkthrough on exploiting a Linux machine. Enumerate Samba for shares, manipulat
 Run nmap to determine open ports. 
 
 ```sh
-> nmap -p1-2100 -sV -vv -sC -oN kenobi.nmap 10.10.179.201
+$ nmap -p1-2100 -sV -vv -sC -oN kenobi.nmap 10.10.179.201
 
 # Nmap 7.92 scan initiated Thu Sep 22 19:09:03 2022 as: nmap -p1-2100 -sV -vv -sC -oN kenobi.nmap 10.10.179.201
 Increasing send delay for 10.10.179.201 from 0 to 5 due to 91 out of 303 dropped probes since last increase.
@@ -117,11 +117,10 @@ Service detection performed. Please report any incorrect results at https://nmap
 # Nmap done at Thu Sep 22 19:09:36 2022 -- 1 IP address (1 host up) scanned in 33.63 seconds
 ```
 
-```sh
-
 Run nmap smb enumeration scripts on port 445 running Samba to discover shares on the server.
 
-> nmap -p 445 --script=smb-enum-shares.nse,smb-enum-users.nse -oN kenobi-smb.nmap 10.10.179.201 
+```sh
+$ nmap -p 445 --script=smb-enum-shares.nse,smb-enum-users.nse -oN kenobi-smb.nmap 10.10.179.201 
  
 # Nmap 7.92 scan initiated Thu Sep 22 19:19:03 2022 as: nmap -p 445 --script=smb-enum-shares.nse,smb-enum-users.nse -oN kenobi-smb.nmap 10.10.179.201
 Nmap scan report for 10.10.179.201

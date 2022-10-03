@@ -16,7 +16,7 @@ Learn about active recon, web app attacks and privilege escalation.
 ### Nmap:
 
 ```sh
- sudo nmap -A -sC -p1-3500 -oN vulnversity.nmap 10.10.73.128
+$ sudo nmap -A -sC -p1-3500 -oN vulnversity.nmap 10.10.73.128
  Starting Nmap 7.92 ( https://nmap.org ) at 2022-09-17 20:35 PDT
 Nmap scan report for 10.10.73.128
 Host is up (0.17s latency).
