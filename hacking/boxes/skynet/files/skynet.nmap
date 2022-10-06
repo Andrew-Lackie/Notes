@@ -1,0 +1,80 @@
+# Nmap 7.92 scan initiated Wed Oct  5 19:45:52 2022 as: nmap -sV -vv -sC -oN skynet.nmap 10.10.215.100
+Increasing send delay for 10.10.215.100 from 0 to 5 due to 262 out of 873 dropped probes since last increase.
+Increasing send delay for 10.10.215.100 from 5 to 10 due to 11 out of 19 dropped probes since last increase.
+Increasing send delay for 10.10.215.100 from 10 to 20 due to 11 out of 15 dropped probes since last increase.
+Increasing send delay for 10.10.215.100 from 20 to 40 due to 11 out of 14 dropped probes since last increase.
+Increasing send delay for 10.10.215.100 from 40 to 80 due to 11 out of 13 dropped probes since last increase.
+Increasing send delay for 10.10.215.100 from 80 to 160 due to 11 out of 14 dropped probes since last increase.
+Increasing send delay for 10.10.215.100 from 160 to 320 due to 11 out of 13 dropped probes since last increase.
+Increasing send delay for 10.10.215.100 from 320 to 640 due to 11 out of 12 dropped probes since last increase.
+Increasing send delay for 10.10.215.100 from 640 to 1000 due to 11 out of 11 dropped probes since last increase.
+Nmap scan report for 10.10.215.100
+Host is up, received echo-reply ttl 63 (0.22s latency).
+Scanned at 2022-10-05 19:45:52 PDT for 105s
+Not shown: 994 closed tcp ports (reset)
+PORT    STATE SERVICE     REASON         VERSION
+22/tcp  open  ssh         syn-ack ttl 63 OpenSSH 7.2p2 Ubuntu 4ubuntu2.8 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey: 
+|   2048 99:23:31:bb:b1:e9:43:b7:56:94:4c:b9:e8:21:46:c5 (RSA)
+| ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDKeTyrvAfbRB4onlz23fmgH5DPnSz07voOYaVMKPx5bT62zn7eZzecIVvfp5LBCetcOyiw2Yhocs0oO1/RZSqXlwTVzRNKzznG4WTPtkvD7ws/4tv2cAGy1lzRy9b+361HHIXT8GNteq2mU+boz3kdZiiZHIml4oSGhI+/+IuSMl5clB5/FzKJ+mfmu4MRS8iahHlTciFlCpmQvoQFTA5s2PyzDHM6XjDYH1N3Euhk4xz44Xpo1hUZnu+P975/GadIkhr/Y0N5Sev+Kgso241/v0GQ2lKrYz3RPgmNv93AIQ4t3i3P6qDnta/06bfYDSEEJXaON+A9SCpk2YSrj4A7
+|   256 57:c0:75:02:71:2d:19:31:83:db:e4:fe:67:96:68:cf (ECDSA)
+| ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBI0UWS0x1ZsOGo510tgfVbNVhdE5LkzA4SWDW/5UjDumVQ7zIyWdstNAm+lkpZ23Iz3t8joaLcfs8nYCpMGa/xk=
+|   256 46:fa:4e:fc:10:a5:4f:57:57:d0:6d:54:f6:c3:4d:fe (ED25519)
+|_ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICHVctcvlD2YZ4mLdmUlSwY8Ro0hCDMKGqZ2+DuI0KFQ
+80/tcp  open  http        syn-ack ttl 63 Apache httpd 2.4.18 ((Ubuntu))
+|_http-server-header: Apache/2.4.18 (Ubuntu)
+|_http-title: Skynet
+| http-methods: 
+|_  Supported Methods: GET HEAD POST OPTIONS
+110/tcp open  pop3        syn-ack ttl 63 Dovecot pop3d
+|_pop3-capabilities: RESP-CODES PIPELINING UIDL SASL AUTH-RESP-CODE TOP CAPA
+139/tcp open  netbios-ssn syn-ack ttl 63 Samba smbd 3.X - 4.X (workgroup: WORKGROUP)
+143/tcp open  imap        syn-ack ttl 63 Dovecot imapd
+|_imap-capabilities: IMAP4rev1 more LITERAL+ have SASL-IR OK ENABLE post-login listed IDLE capabilities LOGINDISABLEDA0001 Pre-login ID LOGIN-REFERRALS
+445/tcp open  netbios-ssn syn-ack ttl 63 Samba smbd 4.3.11-Ubuntu (workgroup: WORKGROUP)
+Service Info: Host: SKYNET; OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+Host script results:
+|_clock-skew: mean: 1h39m59s, deviation: 2h53m12s, median: -1s
+| smb2-security-mode: 
+|   3.1.1: 
+|_    Message signing enabled but not required
+| nbstat: NetBIOS name: SKYNET, NetBIOS user: <unknown>, NetBIOS MAC: <unknown> (unknown)
+| Names:
+|   SKYNET<00>           Flags: <unique><active>
+|   SKYNET<03>           Flags: <unique><active>
+|   SKYNET<20>           Flags: <unique><active>
+|   \x01\x02__MSBROWSE__\x02<01>  Flags: <group><active>
+|   WORKGROUP<00>        Flags: <group><active>
+|   WORKGROUP<1d>        Flags: <unique><active>
+|   WORKGROUP<1e>        Flags: <group><active>
+| Statistics:
+|   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+|   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+|_  00 00 00 00 00 00 00 00 00 00 00 00 00 00
+| smb2-time: 
+|   date: 2022-10-06T02:47:28
+|_  start_date: N/A
+| smb-security-mode: 
+|   account_used: guest
+|   authentication_level: user
+|   challenge_response: supported
+|_  message_signing: disabled (dangerous, but default)
+| p2p-conficker: 
+|   Checking for Conficker.C or higher...
+|   Check 1 (port 44004/tcp): CLEAN (Couldn't connect)
+|   Check 2 (port 22001/tcp): CLEAN (Couldn't connect)
+|   Check 3 (port 39822/udp): CLEAN (Failed to receive data)
+|   Check 4 (port 49968/udp): CLEAN (Failed to receive data)
+|_  0/4 checks are positive: Host is CLEAN or ports are blocked
+| smb-os-discovery: 
+|   OS: Windows 6.1 (Samba 4.3.11-Ubuntu)
+|   Computer name: skynet
+|   NetBIOS computer name: SKYNET\x00
+|   Domain name: \x00
+|   FQDN: skynet
+|_  System time: 2022-10-05T21:47:28-05:00
+
+Read data files from: /usr/bin/../share/nmap
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Wed Oct  5 19:47:37 2022 -- 1 IP address (1 host up) scanned in 105.61 seconds

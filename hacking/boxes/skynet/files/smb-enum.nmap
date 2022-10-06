@@ -1,0 +1,44 @@
+# Nmap 7.92 scan initiated Wed Oct  5 20:35:05 2022 as: nmap --script smb-enum-shares -p445 -oN smb-enum.nmap 10.10.215.100
+Nmap scan report for 10.10.215.100
+Host is up (0.21s latency).
+
+PORT    STATE SERVICE
+445/tcp open  microsoft-ds
+
+Host script results:
+| smb-enum-shares: 
+|   account_used: guest
+|   \\10.10.215.100\IPC$: 
+|     Type: STYPE_IPC_HIDDEN
+|     Comment: IPC Service (skynet server (Samba, Ubuntu))
+|     Users: 1
+|     Max Users: <unlimited>
+|     Path: C:\tmp
+|     Anonymous access: READ/WRITE
+|     Current user access: READ/WRITE
+|   \\10.10.215.100\anonymous: 
+|     Type: STYPE_DISKTREE
+|     Comment: Skynet Anonymous Share
+|     Users: 0
+|     Max Users: <unlimited>
+|     Path: C:\srv\samba
+|     Anonymous access: READ/WRITE
+|     Current user access: READ/WRITE
+|   \\10.10.215.100\milesdyson: 
+|     Type: STYPE_DISKTREE
+|     Comment: Miles Dyson Personal Share
+|     Users: 0
+|     Max Users: <unlimited>
+|     Path: C:\home\milesdyson\share
+|     Anonymous access: <none>
+|     Current user access: <none>
+|   \\10.10.215.100\print$: 
+|     Type: STYPE_DISKTREE
+|     Comment: Printer Drivers
+|     Users: 0
+|     Max Users: <unlimited>
+|     Path: C:\var\lib\samba\printers
+|     Anonymous access: <none>
+|_    Current user access: <none>
+
+# Nmap done at Wed Oct  5 20:35:45 2022 -- 1 IP address (1 host up) scanned in 39.52 seconds

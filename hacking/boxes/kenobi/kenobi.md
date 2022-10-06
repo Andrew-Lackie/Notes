@@ -176,7 +176,7 @@ cat log.txt
 Using `nmap` again, we see the `/var` mount.
 
 ```sh
-> sudo nmap -p 111 --script=nfs-ls,nfs-statfs,nfs-showmount -oN kenobi-nfs.nmap 10.10.179.201
+$ sudo nmap -p 111 --script=nfs-ls,nfs-statfs,nfs-showmount -oN kenobi-nfs.nmap 10.10.179.201
 # Nmap 7.92 scan initiated Thu Sep 22 19:32:11 2022 as: nmap -p 111 --script=nfs-ls,nfs-statfs,nfs-showmount -oN kenobi-nfs.nmap 10.10.179.201
 Nmap scan report for 10.10.179.201
 Host is up (0.22s latency).
