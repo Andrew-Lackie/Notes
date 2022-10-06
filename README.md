@@ -10,6 +10,9 @@
 
 4.) In the process of developing further notes in a number of fields: Physics, Mathematics, Philosophy, Computer Science, Quantum Computing, and more.
 
+![Terminal](img/terminal.png)
+![browser](img/browser.png)
+
 ## Prerequisites
 
 ``` 
