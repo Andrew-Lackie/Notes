@@ -1,4 +1,4 @@
-# Notes using vimwiki
+# Notes
 
 ## Topics
 
