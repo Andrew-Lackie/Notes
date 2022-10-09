@@ -14,8 +14,11 @@
 #### Medium
 
 - [Game Zone](gamezone/gamezone.md)
+- [Skynet](skynet/skynet.md)
 
 #### Hard
+ 
+- [Daily Bugle](daily-bugle/daily-bugle.md)
 
 ## Windows
 
@@ -30,7 +33,7 @@
 - [Steel Mountain](steel-mountain/steelMountain.md)
 - [Alfred](alfred/alfred.md)
 - [HackPark](hackpark/hackpark.md)
-- [Skynet](skynet/skynet.md)
 
 #### Hard
+
 

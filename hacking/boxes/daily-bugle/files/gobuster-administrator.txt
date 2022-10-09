@@ -1,0 +1,7 @@
+/help                 (Status: 301) [Size: 246] [--> http://10.10.8.219/administrator/help/]
+/templates            (Status: 301) [Size: 251] [--> http://10.10.8.219/administrator/templates/]
+/includes             (Status: 301) [Size: 250] [--> http://10.10.8.219/administrator/includes/]
+/language             (Status: 301) [Size: 250] [--> http://10.10.8.219/administrator/language/]
+/modules              (Status: 301) [Size: 249] [--> http://10.10.8.219/administrator/modules/]
+/cache                (Status: 301) [Size: 247] [--> http://10.10.8.219/administrator/cache/]
+/logs                 (Status: 301) [Size: 246] [--> http://10.10.8.219/administrator/logs/]

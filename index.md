@@ -1,8 +1,7 @@
-[#](#.md) My notes
+# Notes
 
----
-##### James 4:10
-> Humble yourselves before the Lord, and he will lift you up.
+> You have power over your mind - not outside events. Realize this, and you will find strength.   
+― Marcus Aurelius, Meditations 
 ---
 
 

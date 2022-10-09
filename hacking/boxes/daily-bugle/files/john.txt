@@ -1,0 +1,3 @@
+Loaded 1 password hash (bcrypt [Blowfish 32/64 X3])
+Cost 1 (iteration count) is 1024 for all loaded hashes
+spiderman123     (?)     
